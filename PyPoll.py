@@ -51,7 +51,20 @@ with open(file_to_load) as election_data:
 
         # Add votes to each candidate
         candidate_votes[candidate_name] +=1
-    # Loop through Candidate list
+
+with open(file_to_save, "w") as txt_file:
+
+    election_results = (
+        f"\nElection Results\n"
+        f"------------------------------------\n"
+        f"Total Votes: {total_votes:,}\n"
+        f"------------------------------------\n\n" 
+    )
+    print(election_results, end = "")
+
+    #Save the final vote count to the text file
+    txt_file.write(election_results)
+        # Loop through Candidate list
     for candidate_name in candidate_votes:
 
         # Retreive vote count for each candidate
@@ -74,31 +87,27 @@ with open(file_to_load) as election_data:
 
         # print candidate name and percentage of votes
         # print(f"{candidate_name}: received {vote_percentage:.1f}% of the vote.")
-        print(f"{candidate_name}: {vote_percentage:.1f}% ({votes:,})\n")
+        candidate_results = (f"{candidate_name}: {vote_percentage:.1f}% ({votes:,})\n")
+
+        print(candidate_results)
+
+        txt_file.write(candidate_results)
 
     winning_candidate_summary = (
-        f"------------------------------------\n"
+        f"\n------------------------------------\n"
         f"Winner: {winning_candidate}\n"
         f"Winning Vote count: {winning_count:,}\n"
-        f"Winning PErcentage: {winning_percentage:.1f}%\n"
+        f"Winning Percentage: {winning_percentage:.1f}%\n"
         f"------------------------------------\n"
     )
 
     print(winning_candidate_summary)
+    txt_file.write(winning_candidate_summary)
+
+
 
     # Print the total votes
     # print(total_votes)
-  
+
     # Print candidate list
     # print(candidate_votes)
-    
-
-    # Who won the ection by garnering the most votes?
-
-#    print(election_data)
-# Create a filename variable to a direct or indirect path to the file.
-
-# Using the open() function with the "w" mode we will write data to the file.
-#with open(file_to_save, "w") as txt_file:
-
-#    txt_file.write("Counties in the Election\n-------------------------\nArapahoe\nDenver\nArapahoe")
